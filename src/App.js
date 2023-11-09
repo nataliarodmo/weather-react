@@ -1,12 +1,15 @@
 
 import './App.css';
+import SearchWeather from "./SearchWeather";
+import Footer from "./Footer";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-       <h1>Holaa</h1>
-      </header>
+      <div className="container weather_box">
+        <SearchWeather />
+      </div>
+      <Footer />
     </div>
   );
 }
