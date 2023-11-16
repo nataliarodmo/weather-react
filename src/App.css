@@ -70,3 +70,7 @@ img {
   width: 70px;
 }
 
+.App {
+max-width: 800px;
+margin: 30px auto;
+}

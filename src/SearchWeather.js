@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SearchWeather.css";
 import cloud from "./images/cloudy.png";
+import axios from "axios";
 
 export default function SearchWeather() {
+  
+  let [weather, setWeather] = useState({loaded:false});
+
+  function showTemperature(response){
+    console.log(response);
+    setWeather ({
+      loaded: true,
+      city: response.data.city,
+      country: response.data.country,
+      temperature: Math.round(response.data.temperature.current),
+      humidity: response.data.temperature.humidity,
+      wind: Math.round(response.data.wind.speed),
+      description: response.data.condition.description,
+      icon: response.data.condition.icon_url
+
+    });
+  }
+
+  if (weather.loaded){
     return (
       <div className="Search">
         <form id="citySearch">
@@ -32,19 +52,19 @@ export default function SearchWeather() {
           </div>
         </form>
         <div className="row Current_weather">
-      <div className="col-4">
-        <h1 className="city-input">Bogota, Colombia</h1>
+      <div className="col-7">
+        <h1 className="city-input">{weather.city}, {weather.country}</h1>
         <ul>
           <li>Sunday 13:04</li>
-          <li>Humidity: 55%</li>
-          <li>Wind: 2 km/h</li>
-          <li className="capitalize" id="description"></li>
+          <li>Humidity: {weather.humidity}%</li>
+          <li>Wind: {weather.wind} km/h</li>
+          <li className="capitalize" id="description">{weather.description}</li>
         </ul>
       </div>
-      <div className="col-8 text-center">
-        <div className="clearfix weather-temperature">
-        <img className="main_icon" src={cloud} alt="weather" />
-          <span className="actual_number"> 18</span>
+      <div className="col-5 text-center">
+        <div className=" weather-temperature">
+        <img className="main_icon" src={weather.icon} alt={weather.description} />
+          <span className="actual_number"> {weather.temperature}</span>
           <span className="units"> ºC </span>
         </div>
       </div>
@@ -109,4 +129,12 @@ export default function SearchWeather() {
       </div>
     </div>
     );
+
+  }
+  else {
+    let key="cf0o37c8aaf1022e4beeb7d4de3tca0a";
+let url=`https://api.shecodes.io/weather/v1/current?query=Bogota&key=${key}`;
+axios.get(url).then(showTemperature);
+return "Loading..."
+  }    
   }
