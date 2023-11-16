@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./SearchWeather.css";
 import cloud from "./images/cloudy.png";
 import axios from "axios";
+import FormattedDate from "./FormattedDate";
 
 export default function SearchWeather() {
   
@@ -13,6 +14,7 @@ export default function SearchWeather() {
       loaded: true,
       city: response.data.city,
       country: response.data.country,
+      date: new Date(response.data.time * 1000),
       temperature: Math.round(response.data.temperature.current),
       humidity: response.data.temperature.humidity,
       wind: Math.round(response.data.wind.speed),
@@ -55,7 +57,7 @@ export default function SearchWeather() {
       <div className="col-7">
         <h1 className="city-input">{weather.city}, {weather.country}</h1>
         <ul>
-          <li>Sunday 13:04</li>
+          <li><FormattedDate date={weather.date} /></li>
           <li>Humidity: {weather.humidity}%</li>
           <li>Wind: {weather.wind} km/h</li>
           <li className="capitalize" id="description">{weather.description}</li>
