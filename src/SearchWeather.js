@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import "./SearchWeather.css";
+import WeatherInfo from "./WeatherInfo";
 import cloud from "./images/cloudy.png";
 import axios from "axios";
-import FormattedDate from "./FormattedDate";
 
-export default function SearchWeather() {
+
+export default function SearchWeather(props) {
   
   let [weather, setWeather] = useState({loaded:false});
+  const [city, setCity] = useState(props.defaultCity);
 
   function showTemperature(response){
-    console.log(response);
     setWeather ({
       loaded: true,
       city: response.data.city,
@@ -24,10 +25,27 @@ export default function SearchWeather() {
     });
   }
 
+function search(){
+  let key="cf0o37c8aaf1022e4beeb7d4de3tca0a";
+let url=`https://api.shecodes.io/weather/v1/current?query=${city}&key=${key}`;
+axios.get(url).then(showTemperature);
+
+}
+
+ function handleSubmit(event){
+  event.preventDefault();
+  search();
+  // searh for a city//
+
+
+ }
+ function handleCityChange (event){
+  setCity(event.target.value);
+ }
   if (weather.loaded){
     return (
       <div className="Search">
-        <form id="citySearch">
+        <form id="citySearch" onSubmit={handleSubmit}>
           <div className="row search-section">
             <div className="col-7">
               <input
@@ -37,6 +55,7 @@ export default function SearchWeather() {
                 id="enterCity"
                 autoFocus="on"
                 autoComplete="off"
+                onChange={handleCityChange}
               />
             </div>
             <div className="col-2">
@@ -53,41 +72,24 @@ export default function SearchWeather() {
           </div>
           </div>
         </form>
-        <div className="row Current_weather">
-      <div className="col-7">
-        <h1 className="city-input">{weather.city}, {weather.country}</h1>
-        <ul>
-          <li><FormattedDate date={weather.date} /></li>
-          <li>Humidity: {weather.humidity}%</li>
-          <li>Wind: {weather.wind} km/h</li>
-          <li className="capitalize" id="description">{weather.description}</li>
-        </ul>
-      </div>
-      <div className="col-5 text-center">
-        <div className=" weather-temperature">
-        <img className="main_icon" src={weather.icon} alt={weather.description} />
-          <span className="actual_number"> {weather.temperature}</span>
-          <span className="units"> ºC </span>
-        </div>
-      </div>
-    </div>
-    <div className="row weather-forecast" id="forecast">
-      <div className="col-3 text-center">
-        <div className="weather-forecast-day">
+        <WeatherInfo data={weather} />
+        <div className="row weather-forecast" id="forecast">
+          <div className="col-3 text-center">
+            <div className="weather-forecast-day">
             Mon
-        </div>
-        <img
+            </div>
+            <img
                 className="sunny_forecast"
                 src={cloud}
                 alt="weather"
               />
-        <div className="weather-forecast-temperature"> 
-            <span className="weather-forecast-temperature-max">15º</span>
-            <span className="weather-forecast-temperature-min">7º </span>
-         </div>
-      </div>
-     <div className="col-3 text-center">
-      <div className="weather-forecast-day">
+            <div className="weather-forecast-temperature"> 
+              <span className="weather-forecast-temperature-max">15º</span>
+              <span className="weather-forecast-temperature-min">7º </span>
+            </div>
+          </div>
+          <div className="col-3 text-center">
+            <div className="weather-forecast-day">
             Tue
             </div>
             <img
@@ -99,44 +101,13 @@ export default function SearchWeather() {
               <span className="weather-forecast-temperature-max">15º</span>
               <span className="weather-forecast-temperature-min">7º </span>
             </div>
-      </div>
-      <div className="col-3 text-center">
-        <div className="weather-forecast-day">
-            Wed
-            </div>
-            <img
-                className="sunny_forecast"
-                src={cloud}
-                alt="weather"
-              />
-            <div className="weather-forecast-temperature"> 
-              <span className="weather-forecast-temperature-max">15º</span>
-              <span className="weather-forecast-temperature-min">7º </span>
-            </div>
-       </div>
-      <div className="col-3 text-center">
-        <div className="weather-forecast-day">
-            Thur
-            </div>
-            <img
-                className="sunny_forecast"
-                src={cloud}
-                alt="weather"
-              />
-            <div className="weather-forecast-temperature"> 
-              <span className="weather-forecast-temperature-max">15º</span>
-              <span className="weather-forecast-temperature-min">7º </span>
-            </div>
-        </div>
-      </div>
-    </div>
+          </div>
+       </div> 
+       </div> 
     );
-
-  }
+    }
   else {
-    let key="cf0o37c8aaf1022e4beeb7d4de3tca0a";
-let url=`https://api.shecodes.io/weather/v1/current?query=Bogota&key=${key}`;
-axios.get(url).then(showTemperature);
+    search();
 return "Loading..."
-  }    
   }
+}
