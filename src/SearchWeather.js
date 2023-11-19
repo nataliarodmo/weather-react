@@ -102,6 +102,34 @@ axios.get(url).then(showTemperature);
               <span className="weather-forecast-temperature-min">7º </span>
             </div>
           </div>
+          <div className="col-3 text-center">
+            <div className="weather-forecast-day">
+            Wed
+            </div>
+            <img
+                className="sunny_forecast"
+                src={cloud}
+                alt="weather"
+              />
+            <div className="weather-forecast-temperature"> 
+              <span className="weather-forecast-temperature-max">15º</span>
+              <span className="weather-forecast-temperature-min">7º </span>
+            </div>
+          </div>
+          <div className="col-3 text-center">
+            <div className="weather-forecast-day">
+            Thur
+            </div>
+            <img
+                className="sunny_forecast"
+                src={cloud}
+                alt="weather"
+              />
+            <div className="weather-forecast-temperature"> 
+              <span className="weather-forecast-temperature-max">15º</span>
+              <span className="weather-forecast-temperature-min">7º </span>
+            </div>
+          </div>
        </div> 
        </div> 
     );
