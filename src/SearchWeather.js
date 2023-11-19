@@ -16,7 +16,7 @@ export default function SearchWeather(props) {
       city: response.data.city,
       country: response.data.country,
       date: new Date(response.data.time * 1000),
-      temperature: Math.round(response.data.temperature.current),
+      temperature: response.data.temperature.current,
       humidity: response.data.temperature.humidity,
       wind: Math.round(response.data.wind.speed),
       description: response.data.condition.description,
