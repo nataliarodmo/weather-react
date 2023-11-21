@@ -1,0 +1,17 @@
+.weather-forecast {
+    padding-top: 10px;
+    color: rgb(17, 63, 103);
+  }
+  .weather-forecast-day {
+    opacity: 0.7;
+    font-size: 20px;
+  }
+  .weather-forecast-temperature {
+    font-size: 18px;
+  }
+  .weather-forecast-temperature-min {
+    opacity: 0.6;
+  }
+  .sunny_forecast {
+    width: 70px;
+  }

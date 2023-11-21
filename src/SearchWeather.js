@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SearchWeather.css";
 import WeatherInfo from "./WeatherInfo";
-import cloud from "./images/cloudy.png";
+import WeatherForecast from "./WeatherForecast";
 import axios from "axios";
 
 
@@ -73,64 +73,8 @@ axios.get(url).then(showTemperature);
           </div>
         </form>
         <WeatherInfo data={weather} />
-        <div className="row weather-forecast" id="forecast">
-          <div className="col-3 text-center">
-            <div className="weather-forecast-day">
-            Mon
-            </div>
-            <img
-                className="sunny_forecast"
-                src={cloud}
-                alt="weather"
-              />
-            <div className="weather-forecast-temperature"> 
-              <span className="weather-forecast-temperature-max">15º</span>
-              <span className="weather-forecast-temperature-min">7º </span>
-            </div>
-          </div>
-          <div className="col-3 text-center">
-            <div className="weather-forecast-day">
-            Tue
-            </div>
-            <img
-                className="sunny_forecast"
-                src={cloud}
-                alt="weather"
-              />
-            <div className="weather-forecast-temperature"> 
-              <span className="weather-forecast-temperature-max">15º</span>
-              <span className="weather-forecast-temperature-min">7º </span>
-            </div>
-          </div>
-          <div className="col-3 text-center">
-            <div className="weather-forecast-day">
-            Wed
-            </div>
-            <img
-                className="sunny_forecast"
-                src={cloud}
-                alt="weather"
-              />
-            <div className="weather-forecast-temperature"> 
-              <span className="weather-forecast-temperature-max">15º</span>
-              <span className="weather-forecast-temperature-min">7º </span>
-            </div>
-          </div>
-          <div className="col-3 text-center">
-            <div className="weather-forecast-day">
-            Thur
-            </div>
-            <img
-                className="sunny_forecast"
-                src={cloud}
-                alt="weather"
-              />
-            <div className="weather-forecast-temperature"> 
-              <span className="weather-forecast-temperature-max">15º</span>
-              <span className="weather-forecast-temperature-min">7º </span>
-            </div>
-          </div>
-       </div> 
+        <WeatherForecast location={weather.city}/>
+        
        </div> 
     );
     }
