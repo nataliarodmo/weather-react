@@ -13,6 +13,7 @@ export default function SearchWeather(props) {
   function showTemperature(response){
     setWeather ({
       loaded: true,
+      coordinates: response.data.coordinates,
       city: response.data.city,
       country: response.data.country,
       date: new Date(response.data.time * 1000),
@@ -23,6 +24,7 @@ export default function SearchWeather(props) {
       icon: response.data.condition.icon_url
 
     });
+    console.log(response.data.coordinates);
   }
 
 function search(){
@@ -73,7 +75,7 @@ axios.get(url).then(showTemperature);
           </div>
         </form>
         <WeatherInfo data={weather} />
-        <WeatherForecast location={weather.city}/>
+        <WeatherForecast coordinates={weather.coordinates}/>
         
        </div> 
     );
