@@ -24,7 +24,6 @@ export default function SearchWeather(props) {
       icon: response.data.condition.icon_url
 
     });
-    console.log(response.data.coordinates);
   }
 
 function search(){
@@ -49,7 +48,7 @@ axios.get(url).then(showTemperature);
       <div className="Search">
         <form id="citySearch" onSubmit={handleSubmit}>
           <div className="row search-section">
-            <div className="col-7">
+            <div className="col-9">
               <input
                 type="search"
                 placeholder="Enter a city.."
@@ -60,18 +59,18 @@ axios.get(url).then(showTemperature);
                 onChange={handleCityChange}
               />
             </div>
-            <div className="col-2">
+            <div className="col-3">
               <input
                 type="submit"
                 value="Search"
                 className="btn btn-primary me-md-2 w-100"
               />
             </div>
-            <div className="col-3" id="current-location">
+           {/* <div className="col-3" id="current-location">
             <button className="btn btn-outline-primary w-100" type="Click">
               Current Location
             </button>
-          </div>
+    </div> */}
           </div>
         </form>
         <WeatherInfo data={weather} />
